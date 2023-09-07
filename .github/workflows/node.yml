@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js version ${{ maxtrix.node-version }}
+      - name: Use Node.js version ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ maxtrix.node-version }}
+          node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run build
       - run: npm test
