@@ -1,17 +1,23 @@
 name: MEDIA Project CI
-on: 
-  push: 
-    branches: [ master ]
-  pull_request: 
-    branches: [ master ]
-jobs: 
-  build: 
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  build:
+    env:
+      CI: true
+    strategy:
+      matrix:
+        node-version: [16x, 20x]
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js version 20
+      - name: Use Node.js version ${{ maxtrix.node-version }}
         uses: actions/setup-node@v3
-        with: 
-          node-version: '20'
+        with:
+          node-version: ${{ maxtrix.node-version }}
       - run: npm install
       - run: npm run build
+      - run: npm test
